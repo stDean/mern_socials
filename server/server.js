@@ -4,13 +4,16 @@ require('express-async-errors');
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const multer = require('multer');
 const path = require('path');
 
 const connectDB = require('./connect/db');
 const NOT_FOUND_MIDDLEWARE = require('./middleware/route-not-found');
 const ERROR_HANDLING_MIDDLEWARE = require('./middleware/error-handling');
+const AuthRouter = require('./router/auth.router');
+const { register } = require('./controllers/auth.controller');
+
 
 
 // security
@@ -39,9 +42,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-app.get('/', (req, res) => {
-  res.status(200).json({ msg: "Helllo" })
-});
+// routes
+app.post('/api/v1/auth/register', upload.single('picture'), register);
+app.use('/api/v1/auth', AuthRouter);
 
 
 app.use(NOT_FOUND_MIDDLEWARE);
@@ -49,7 +52,7 @@ app.use(ERROR_HANDLING_MIDDLEWARE);
 
 const start = async () => {
   try {
-    // await connectDB(process.env.MONGODB_URI)
+    await connectDB(process.env.MONGODB_URI);
     app.listen(PORT, () => {
       console.log(`Server is listening on port: ${PORT}`);
     });
