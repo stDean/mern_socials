@@ -33,7 +33,6 @@ const authCtrl = {
 
     const token = user.createJWT();
     delete user._doc.password;
-    console.log(user);
     res.status(StatusCodes.OK).json({ user, token });
   },
 }

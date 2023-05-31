@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { UnauthenticatedError } = require('../errors');
 
 const AuthMiddleware = async (req, res, next) => {
-  const authHeader = req.headers.Authorization;
+  const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     throw new UnauthenticatedError("Unauthorized User.");
@@ -13,8 +13,7 @@ const AuthMiddleware = async (req, res, next) => {
 
   try {
     const payload = await jwt.verify(token, process.env.JWT_SECRET);
-    const { userId } = payload;
-    req.user = userId;
+    req.user = payload;
     next();
   } catch (error) {
     throw new UnauthenticatedError('Invalid Authentication.');

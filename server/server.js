@@ -11,9 +11,10 @@ const path = require('path');
 const connectDB = require('./connect/db');
 const NOT_FOUND_MIDDLEWARE = require('./middleware/route-not-found');
 const ERROR_HANDLING_MIDDLEWARE = require('./middleware/error-handling');
+const AUTHORIZATION_MIDDLEWARE = require('./middleware/auth.middleware');
 const AuthRouter = require('./router/auth.router');
 const { register } = require('./controllers/auth.controller');
-
+const UserRouter = require('./router/user.router');
 
 
 // security
@@ -45,6 +46,7 @@ const upload = multer({ storage });
 // routes
 app.post('/api/v1/auth/register', upload.single('picture'), register);
 app.use('/api/v1/auth', AuthRouter);
+app.use('/api/v1/user', AUTHORIZATION_MIDDLEWARE, UserRouter);
 
 
 app.use(NOT_FOUND_MIDDLEWARE);
