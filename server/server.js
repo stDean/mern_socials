@@ -15,6 +15,8 @@ const AUTHORIZATION_MIDDLEWARE = require('./middleware/auth.middleware');
 const AuthRouter = require('./router/auth.router');
 const { register } = require('./controllers/auth.controller');
 const UserRouter = require('./router/user.router');
+const { createPost } = require('./controllers/posts.controller');
+const PostsRouter = require('./router/posts.router');
 
 
 // security
@@ -45,8 +47,11 @@ const upload = multer({ storage });
 
 // routes
 app.post('/api/v1/auth/register', upload.single('picture'), register);
+app.post("/api/v1/posts", AUTHORIZATION_MIDDLEWARE, upload.single("picture"), createPost);
+
 app.use('/api/v1/auth', AuthRouter);
 app.use('/api/v1/user', AUTHORIZATION_MIDDLEWARE, UserRouter);
+app.use('/api/v1/posts', AUTHORIZATION_MIDDLEWARE, PostsRouter);
 
 
 app.use(NOT_FOUND_MIDDLEWARE);

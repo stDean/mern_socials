@@ -5,6 +5,6 @@ const { getUser, getUserFriends, addRemoveUser } = require('../controllers/user.
 
 router.route('/:id').get(getUser);
 router.route('/:id/friends').get(getUserFriends);
-router.route('/:id/:friendId').patch(addRemoveUser)
+router.route('/:id/:friendId').patch(addRemoveUser);
 
 module.exports = router;
