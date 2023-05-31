@@ -18,6 +18,10 @@ const UserRouter = require('./router/user.router');
 const { createPost } = require('./controllers/posts.controller');
 const PostsRouter = require('./router/posts.router');
 
+const User = require('./models/user.model');
+const Post = require('./models/posts.model');
+const { users, posts } = require('./data');
+
 
 // security
 const cors = require('cors');
@@ -60,6 +64,9 @@ app.use(ERROR_HANDLING_MIDDLEWARE);
 const start = async () => {
   try {
     await connectDB(process.env.MONGODB_URI);
+    /* ADD DATA ONE TIME */
+    // User.insertMany(users);
+    // Post.insertMany(posts);
     app.listen(PORT, () => {
       console.log(`Server is listening on port: ${PORT}`);
     });
