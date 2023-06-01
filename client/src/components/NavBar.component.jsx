@@ -20,6 +20,7 @@ const NavBar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const user = useSelector(({ auth }) => auth.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  console.log(user);
 
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
