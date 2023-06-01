@@ -18,9 +18,9 @@ const UserRouter = require('./router/user.router');
 const { createPost } = require('./controllers/posts.controller');
 const PostsRouter = require('./router/posts.router');
 
-const User = require('./models/user.model');
-const Post = require('./models/posts.model');
-const { users, posts } = require('./data');
+// const User = require('./models/user.model');
+// const Post = require('./models/posts.model');
+// const { users, posts } = require('./data');
 
 
 // security
