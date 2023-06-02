@@ -7,7 +7,7 @@ import {
 import { Box, Typography, Divider, useTheme } from "@mui/material";
 
 import UserImage from "../UserImage.component";
-import FlexBetween from "../../helpers/FlexBetween.helper";
+import FlexBetween from "helpers/FlexBetween.helper";
 import WidgetWrapper from "helpers/WidgetWrapper.helper";
 
 const UserWidget = ({ userId, picturePath }) => {
@@ -32,7 +32,7 @@ const UserWidget = ({ userId, picturePath }) => {
       setUser(data);
     }
     return () => getUser();
-  }, []);
+  }, [token, userId]);
 
   if (!user) {
     return null;
@@ -78,7 +78,13 @@ const UserWidget = ({ userId, picturePath }) => {
           </Box>
         </FlexBetween>
 
-        <ManageAccountsOutlined />
+        <Box sx={{
+          "&:hover": {
+            cursor: "pointer",
+          },
+        }}>
+          <ManageAccountsOutlined />
+        </Box>
       </FlexBetween>
 
       <Divider />
