@@ -14,7 +14,6 @@ function App() {
   // only change the theme when the mode changes
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const isAuth = Boolean(token);
-  console.log(isAuth);
 
   return (
     <div className="app">

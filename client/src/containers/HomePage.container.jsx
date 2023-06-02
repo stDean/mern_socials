@@ -1,7 +1,7 @@
 import { Box, useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
 
-import { NavBar, PostInputWidget, UserWidget } from "components";
+import { NavBar, PostInputWidget, PostsWidget, UserWidget } from "components";
 
 const HomePage = () => {
 
@@ -28,6 +28,7 @@ const HomePage = () => {
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
           <PostInputWidget picturePath={picturePath} />
+          <PostsWidget userId={_id} />
         </Box>
 
         {

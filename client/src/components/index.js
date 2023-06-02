@@ -4,3 +4,4 @@ export { default as Form } from "./Form.component";
 export { default as NotFound } from "./NotFound.component";
 export { default as UserWidget } from "./widget/User.widget";
 export { default as PostInputWidget } from "./widget/PostInput.widget";
+export { default as PostsWidget } from "./widget/Posts.widget";

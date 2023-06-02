@@ -26,13 +26,13 @@ const postCtrl = {
     res.status(StatusCodes.CREATED).json(post);
   },
   getFeedPosts: async (req, res) => {
-    const post = await Post.find();
-    res.status(StatusCodes.OK).json({ post, nbHits: post.length });
+    const posts = await Post.find();
+    res.status(StatusCodes.OK).json({ posts, nbHits: posts.length });
   },
   getUserPosts: async (req, res) => {
     const { userId } = req.params;
-    const post = await Post.find({ userId });
-    res.status(StatusCodes.OK).json({ post, nbHits: post.length });
+    const posts = await Post.find({ userId });
+    res.status(StatusCodes.OK).json({ posts, nbHits: posts.length });
   },
   updateLikePost: async (req, res) => {
     const { params: { postId }, user: { userId } } = req;
