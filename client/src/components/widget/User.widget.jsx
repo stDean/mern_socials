@@ -23,7 +23,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
   useEffect(() => {
     const getUser = async () => {
-      const response = await fetch(`api/v1/user/${userId}`, {
+      const response = await fetch(`/api/v1/user/${userId}`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       });

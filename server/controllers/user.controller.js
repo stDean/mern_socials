@@ -9,7 +9,7 @@ const userCtrl = {
     const { id } = req.params;
     const user = await User.findById(id);
     if (!user) {
-      throw BadRequestError("No User Found");
+      throw new BadRequestError("No User Found");
     }
 
     res.status(StatusCodes.OK).json(user);
@@ -18,7 +18,7 @@ const userCtrl = {
     const { id } = req.params;
     const user = await User.findById(id);
     if (!user) {
-      throw BadRequestError("No User Found");
+      throw new BadRequestError("No User Found");
     }
 
     const friends = await Promise.all(
@@ -40,11 +40,11 @@ const userCtrl = {
     const friend = await User.findById(friendId);
 
     if (!user) {
-      throw BadRequestError("No User Found");
+      throw new BadRequestError("No User Found");
     }
 
     if (!friend) {
-      throw BadRequestError("No Friend with that ID found.");
+      throw new BadRequestError("No Friend with that ID found.");
     }
 
     /**

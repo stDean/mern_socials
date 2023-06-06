@@ -1,8 +1,57 @@
-import React from 'react'
+import { Box, useMediaQuery } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import { PostsWidget, PostInputWidget, UserWidget, FriendsListWidget, NavBar } from "components";
 
 const ProfilePage = () => {
+
+  const [user, setUser] = useState(null);
+  const { userId } = useParams();
+  const token = useSelector(({ auth }) => auth.token);
+  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
+
+  useEffect(() => {
+    const getUser = async () => {
+      const response = await fetch(`/api/v1/user/${userId}`, {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await response.json();
+      setUser(data);
+    };
+
+    getUser()
+  }, [userId, token]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!user) return null;
+
   return (
-    <div>ProfilePage</div>
+    <Box>
+      <NavBar />
+      <Box
+        width="100%"
+        padding="2rem 6%"
+        display={isNonMobileScreens ? "flex" : "block"}
+        gap="2rem"
+        justifyContent="center"
+      >
+        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+          <UserWidget userId={userId} picturePath={user.picturePath} />
+          <Box m="2rem 0" />
+          <FriendsListWidget userId={user._id} />
+        </Box>
+        <Box
+          flexBasis={isNonMobileScreens ? "42%" : undefined}
+          mt={isNonMobileScreens ? undefined : "2rem"}
+        >
+          <PostInputWidget picturePath={user.picturePath} />
+          <Box m="2rem 0" />
+          <PostsWidget userId={userId} isProfile />
+        </Box>
+      </Box>
+    </Box>
   )
 }
 

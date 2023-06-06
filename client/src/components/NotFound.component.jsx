@@ -14,7 +14,7 @@ function NotFound() {
         fontWeight: 500,
         fontSize: '2rem'
       }}>
-        <a href="/home">Go Home</a>
+        <a href="/">Go Home</a>
       </p>
       <p style={{
         marginTop: 200,

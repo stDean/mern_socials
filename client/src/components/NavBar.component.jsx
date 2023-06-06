@@ -37,7 +37,7 @@ const NavBar = () => {
           fontWeight="bold"
           fontSize="clamp(1rem, 2rem, 2.25rem)"
           color="primary"
-          onClick={() => navigate("/home")}
+          onClick={() => navigate("/")}
           sx={{
             "&:hover": {
               opacity: 0.7,

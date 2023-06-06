@@ -12,10 +12,12 @@ const FriendsListWidget = ({ userId }) => {
   const { palette } = useTheme();
   const { token, user: { friends } } = useSelector(({ auth }) => auth);
 
+  console.log(friends);
+
   useEffect(() => {
     const getFriends = async () => {
       const response = await fetch(
-        `/api/v1/user/${userId}/friends`,
+        `/api/v1/user/friends/${userId}`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
@@ -25,8 +27,8 @@ const FriendsListWidget = ({ userId }) => {
       dispatch(SET_FRIENDS({ friends: data }));
     };
 
-    return () => getFriends();
-  }, [token, dispatch, userId])
+    getFriends();
+  }, [token, dispatch, userId]);
 
   return (
     <WidgetWrapper>

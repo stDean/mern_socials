@@ -26,7 +26,7 @@ const postCtrl = {
     res.status(StatusCodes.CREATED).json(post);
   },
   getFeedPosts: async (req, res) => {
-    const posts = await Post.find();
+    const posts = await Post.find().sort('-createdAt');
     res.status(StatusCodes.OK).json({ posts, nbHits: posts.length });
   },
   getUserPosts: async (req, res) => {
