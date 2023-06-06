@@ -85,7 +85,7 @@ const Form = () => {
           token: savedUser.token,
         })
       );
-      navigate("/home");
+      navigate("/");
     }
   }
 
@@ -104,7 +104,7 @@ const Form = () => {
           token: loggedIn.token,
         })
       );
-      navigate("/home");
+      navigate("/");
     }
   }
 
