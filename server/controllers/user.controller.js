@@ -51,6 +51,10 @@ const userCtrl = {
      * if the users friends array includes friendsId filter the array and return an array excluding that friends id i.e remove the friend from the users friends list. Same for the friend.
      * else add the friend to the users friends list.
      */
+    if (id === friendId) {
+      throw new BadRequestError('cannot add your self as a friend')
+    }
+
     if (user.friends.includes(friendId)) {
       user.friends = user.friends.filter(id => id !== friendId);
       friend.friends = friend.friends.filter(id => id !== id);
